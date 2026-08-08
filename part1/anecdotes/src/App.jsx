@@ -21,7 +21,11 @@ const App = () => {
     const [selected, setSelected] = useState(0)
     const [votes, setVotes] = useState({ 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 })
 
-
+    const entries = Object.entries(votes)
+    const sorted = entries.sort((a, b) => b[1] - a[1])[0]
+    const popularAnecdote = Number(sorted[0])
+    
+    
     const setToSelected = () => {
         const number = Math.floor(Math.random() * anecdotes.length)
         setSelected(number)
@@ -32,10 +36,13 @@ const App = () => {
     }
     return (
         <div>
+            <h2>Anecdote of the day</h2>
             {anecdotes[selected]}
             <p>has {votes[selected]} votes</p>
             <Button onClick={addVote} title="vote"/>
             <Button onClick={setToSelected} title="next anecdotes"/>
+            <h2>Anecdote with most votes</h2>
+            {sorted[1] == 0 ? " " : anecdotes[popularAnecdote]}
         </div>
     )
 }
