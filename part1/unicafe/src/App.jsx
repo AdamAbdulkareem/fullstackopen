@@ -35,15 +35,40 @@ const StatisticLine = ({ text, value }) => {
 const Statistics = ({ good, neutral, bad, all }) => {
   const average = (good - bad) / all
   const percentage = (good * 100) / all
+  if (all == 0){
+    return (
+      <div>
+        No feedback given
+      </div>
+    )
+  }
 
   return (
     <div>
-      <StatisticLine text="good" value={good} />
-      <StatisticLine text="neutral" value={neutral} />
-      <StatisticLine text="bad" value={bad} />
-      <StatisticLine text="all" value={all} />
-      <StatisticLine text="average" value={average} />
-      <StatisticLine text="positive" value={percentage} />
+      <table>
+        <tbody>
+          <tr>
+            <td><StatisticLine text="good" value={good} /></td>
+          </tr>
+          <tr>
+            <td> <StatisticLine text="neutral" value={neutral} /></td>
+          </tr>
+          <tr>
+            <td>  <StatisticLine text="bad" value={bad} /></td>
+          </tr>
+          <tr>
+            <td> <StatisticLine text="all" value={all} /></td>
+          </tr>
+          <tr>
+            <td><StatisticLine text="average" value={average} /></td>
+          </tr>
+          <tr>
+            <td>
+              <StatisticLine text="positive" value={percentage} /></td>
+          </tr>
+        </tbody>
+
+      </table>
     </div>
   )
 }
@@ -72,22 +97,6 @@ const App = () => {
     setAll(all + 1)
   }
 
-
-  if (all == 0) {
-    return (
-      <div>
-        <Header title="Give Feedback" />
-        <div className="rating-btn">
-          <Button onClick={() => setToGood()} description="good" />
-          <Button onClick={() => setToNeutral()} description="neutral" />
-          <Button onClick={() => setToBad()} description="bad" />
-        </div>
-
-        <Header title="Statistics" />
-        "No feedback given"
-      </div>
-    )
-  }
   return (
     <div>
       <Header title="Give Feedback" />
