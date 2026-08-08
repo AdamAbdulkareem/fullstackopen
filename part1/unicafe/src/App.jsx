@@ -16,46 +16,12 @@ const Button = ({ onClick, description }) => {
     </div>
   )
 }
-const Ranking = ({ description, rating }) => {
+
+const Statistics = ({ description, rating }) => {
+
   return (
     <div>
       {description} {rating}
-    </div>
-  )
-}
-
-const Total = ({ total }) => {
-  return (
-    <p>all {total}</p>
-  )
-}
-
-const Average = ({ positiveRating, negativeRating, total }) => {
-  if (total == 0) {
-    return (
-      "No feedback given"
-    )
-  }
-  const average = (positiveRating - negativeRating) / total
-  return (
-    <div>
-      average {average}
-    </div>
-  )
-}
-const Percent = ({ positiveRating, total }) => {
-  if (total == 0) {
-    return (
-      <div>
-        Positive: "No feedback given"
-      </div>
-
-    )
-  }
-  const percentage = (positiveRating * 100) / total
-  return (
-    <div>
-      positive {percentage} %
     </div>
   )
 }
@@ -65,6 +31,9 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
   const [all, setAll] = useState(0)
+
+  const average = (good - bad) / all
+  const percentage = (good * 100) / all
 
   const setToGood = () => {
     const updateGood = good + 1
@@ -82,6 +51,22 @@ const App = () => {
     setAll(all + 1)
   }
 
+
+  if (all == 0) {
+    return (
+      <div>
+        <Header title="Give Feedback" />
+        <div className="rating-btn">
+          <Button onClick={() => setToGood()} description="good" />
+          <Button onClick={() => setToNeutral()} description="neutral" />
+          <Button onClick={() => setToBad()} description="bad" />
+        </div>
+
+        <Header title="Statistics" />
+        "No feedback given"
+      </div>
+    )
+  }
   return (
     <div>
       <Header title="Give Feedback" />
@@ -92,15 +77,12 @@ const App = () => {
       </div>
 
       <Header title="Statistics" />
-      <div className="ranking">
-        <Ranking description="good" rating={good} />
-        <Ranking description="neutral" rating={neutral} />
-        <Ranking description="bad" rating={bad} />
-        <Total total={all} />
-        <Average positiveRating={good} negativeRating={bad} total={all} />
-        <Percent positiveRating={good} total={all} />
-      </div>
-
+      <Statistics description="good" rating={good} />
+      <Statistics description="neutral" rating={neutral} />
+      <Statistics description="bad" rating={bad} />
+      <p>all {all}</p>
+      average {average} <br />
+      positive {percentage} %
     </div>
   )
 }
