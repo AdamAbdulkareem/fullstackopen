@@ -21,15 +21,19 @@ const Content = ({ parts }) => {
 
 
 const Course = ({ course }) => {
+
+  const total = (course.parts).reduce((sum, part) => sum + part.exercises, 0)
   return (
     <div>
       <Header course={course.name} />
       <Content parts={course.parts} />
+      <h4>total of {total} exercises</h4>
     </div>
   )
 }
 
 const App = () => {
+
   const course = {
     id: 1,
     name: 'Half Stack application development',
@@ -49,6 +53,11 @@ const App = () => {
         exercises: 14,
         id: 3
       },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
+      }
     ],
   }
 
