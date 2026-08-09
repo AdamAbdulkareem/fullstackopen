@@ -1,4 +1,4 @@
-const Header = (props) => <h1>{props.course}</h1>
+const Header = (props) => <h2>{props.course}</h2>
 
 
 const Parts = ({ parts }) => {
@@ -82,7 +82,13 @@ const App = () => {
     }
   ]
 
-  return <Course course={courses} />
+  return (
+    <>
+      <h1>Web development curriculum</h1>
+      <Course course={courses} />
+    </>
+
+  )
 }
 
 export default App
