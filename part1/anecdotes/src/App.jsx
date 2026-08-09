@@ -43,6 +43,7 @@ const App = () => {
             <Button onClick={setToSelected} title="next anecdotes"/>
             <h2>Anecdote with most votes</h2>
             {sorted[1] == 0 ? " " : anecdotes[popularAnecdote]}
+            
         </div>
     )
 }
